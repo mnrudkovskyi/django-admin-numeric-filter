@@ -73,10 +73,14 @@ class RangeNumericFilter(admin.FieldListFilter):
 
         if self.parameter_name + '_from' in params:
             value = params.pop(self.field_path + '_from')
+            if isinstance(value, list):
+                value = value[0]
             self.used_parameters[self.field_path + '_from'] = value
 
         if self.parameter_name + '_to' in params:
             value = params.pop(self.field_path + '_to')
+            if isinstance(value, list):
+                value = value[0]
             self.used_parameters[self.field_path + '_to'] = value
 
     def queryset(self, request, queryset):
